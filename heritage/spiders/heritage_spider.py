@@ -11,9 +11,8 @@ class HeritageSpider(scrapy.Spider):
         with open("heritage.json") as json_file:
             json_data = json.load(json_file)
             urls = json_data
-
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+            for url in urls:
+                yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         page = response.url.split("/")[-2]
