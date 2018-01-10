@@ -1,4 +1,5 @@
 import scrapy
+import json
 
 
 class HeritageSpider(scrapy.Spider):
@@ -6,7 +7,10 @@ class HeritageSpider(scrapy.Spider):
     name = "heritage"
 
     def start_requests(self):
-        urls = ['http://whc.unesco.org/en/list/570/', 'http://whc.unesco.org/en/list/569/', ]
+        # urls = ['http://whc.unesco.org/en/list/570/', 'http://whc.unesco.org/en/list/569/', ]
+        with open("heritage.json") as json_file:
+            json_data = json.load(json_file)
+            urls = json_data
 
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
